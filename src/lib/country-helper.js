@@ -40,7 +40,7 @@ exports.filterCountries = (country, date) => {
     };
     request(options, function (error, response, body) {
       if (error) reject(error);
-      console.log("---", response)
+      
       if(body){
         resolve(JSON.parse(body));
       }else{

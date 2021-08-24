@@ -38,22 +38,32 @@ function routes(app, rootUrl) {
     * @apiGroup Countries
     * @apiName Get the population details
     * @apiDescription Returns an array of country names
-    *
-    * @apiSampleRequest /api/v1/population/Brazil/2015-12-24
+    * @sort as ASC or DSC
+    * @apiSampleRequest localhost:3000/api/v1/population/2015-12-24?country[]=Brazil&country[]=Algeria&sort=DSC
+    * 
     *
     * @apiSuccess {json} json data with country name and population
     * @apiSuccessExample {json} Success-Response:
     *   HTTP/1.1 200 OK
     *   {
-    *"total_population": {
-    *   "date": "2015-12-24",
-    *    "population": 208679204
-    * }
-    *}
+    *"[
+    *    {
+    *        "total_population": {
+    *            "date": "2015-12-24",
+    *            "population": 208679204
+    *        }
+    *    },
+    *    {
+    *        "total_population": {
+    *            "date": "2015-12-24",
+    *            "population": 40010891
+    *        }
+    *    }
+    *]
     *
     * @apiError (Error 500) InternalServerError Returned if there was a server error
     */
-  app.get({url: fullRootUrl + '/population/:country/:date'},
+  app.get({url: fullRootUrl + '/population/:date'},
     
   controller.filterCountries)
 }

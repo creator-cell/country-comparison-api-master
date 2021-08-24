@@ -7,7 +7,7 @@ require('chai').should();
 const countryHelper = require('../../../src/lib/country-helper');
 const filterMockCountries = require('../../fixtures/data/filter-mock.json');
 
-describe('countries endpoint tests population', () => {
+describe('filter countries endpoint tests population', () => {
   let sandbox;
   beforeEach(function beforeEach() {
     sandbox = sinon.sandbox.create();
@@ -31,28 +31,28 @@ describe('countries endpoint tests population', () => {
         if (err) {
           return done(err);
         }
-        
+        console.log(res.body)
         res.body.should.eql(filterMockCountries);
 
         return done();
       });
     });
 
-    // it('should return 500 if error getting population details', function handleErrorGettingCountries(done) {
-    //     const error = new Error('fake error');
-    //     sandbox.stub(countryHelper, 'filterCountries').throws(error);
+    it('should return 500 if error getting population details', function handleErrorGettingCountries(done) {
+        const error = new Error('fake error');
+        sandbox.stub(countryHelper, 'filterCountries').throws(error);
   
-    //     request(app)
-    //     .get(`${endpointUrl}`)
-    //     .set('accept', 'application/json')
-    //     .expect(500)
-    //     .end(err => {
-    //       if (err) {
-    //         return done(err);
-    //       }
-    //       return done();
-    //     });
-    //   });
+        request(app)
+        .get(`${endpointUrl}`)
+        .set('accept', 'application/json')
+        .expect(500)
+        .end(err => {
+          if (err) {
+            return done(err);
+          }
+          return done();
+        });
+      });
 
 
 
