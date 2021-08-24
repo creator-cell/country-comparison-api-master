@@ -7,6 +7,7 @@ const co = require('co');
 
 module.exports = co.wrap(function* routes(app) {
   const controllerRootUrl = config.routes.controllerRootUrl;
+  console.log("---------------------------------", controllerRootUrl)
 
   let controllersFolder = path.join(__dirname, 'controllers');
   // setup routes for all controllers

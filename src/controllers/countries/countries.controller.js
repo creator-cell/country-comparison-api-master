@@ -8,7 +8,8 @@ const countryHelper = require('../../lib/country-helper');
 exports.getCountries = co.wrap(async function getCountries(req, res, next) {
   try {
     const countries = await countryHelper.getCountries();
-    res.json(JSON.parse(countries));
+    
+    res.json(countries);
     return next();
   } catch (err) {
     return next(new errors.InternalServerError(err, 'Server error retrieving countries.'));
@@ -20,7 +21,7 @@ exports.filterCountries = co.wrap(async function filterCountries(req, res, next)
 
     let countryName = req.params.country;
     let date = req.params.date;
-    console.log("countryName---", countryName);
+    console.log("countryName---", req.query);
     if (countryName && date) {
       const countries = await countryHelper.filterCountries(countryName, date);
 
@@ -31,7 +32,12 @@ exports.filterCountries = co.wrap(async function filterCountries(req, res, next)
 
     return next();
   } catch (err) {
-    return next(new errors.InternalServerError(err, 'Server error retrieving countries.'));
+    if(err.code){
+      return next(new errors.BadRequestError("Data Not Found"));
+    }else{
+      return next(new errors.InternalServerError(err, err));
+    }
+    
   }
 });
 

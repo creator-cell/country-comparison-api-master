@@ -1,6 +1,8 @@
-[
+{
+  "countries": [
   "foo",
   "bar",
   "baz",
   "qux"
 ]
+}

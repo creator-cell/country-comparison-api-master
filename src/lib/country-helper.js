@@ -18,7 +18,8 @@ exports.getCountries = () => {
     };
     request(options, function (error, response, body) {
       if (error) reject(error);
-      resolve(body);
+     
+      resolve(JSON.parse(body));
 
     });
   })
@@ -39,8 +40,14 @@ exports.filterCountries = (country, date) => {
     };
     request(options, function (error, response, body) {
       if (error) reject(error);
+      console.log("---", response)
+      if(body){
+        resolve(JSON.parse(body));
+      }else{
+        reject({"code": 400, "message": "data not found"})
+      }
+
       
-      resolve(JSON.parse(body));
 
     });
   })
