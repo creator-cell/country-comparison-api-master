@@ -1,6 +1,7 @@
 'use strict';
 
 const controller = require('./countries.controller');
+
  
 
 function routes(app, rootUrl) {
@@ -52,9 +53,9 @@ function routes(app, rootUrl) {
     *
     * @apiError (Error 500) InternalServerError Returned if there was a server error
     */
-  app.get({url: fullRootUrl + '/population/:country/:date'},
+  app.get({url: fullRootUrl + '/population/country/:date'},
     
-    controller.filterCountries)
+  controller.filterCountries)
 }
 
   

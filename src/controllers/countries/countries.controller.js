@@ -20,12 +20,13 @@ exports.filterCountries = co.wrap(async function filterCountries(req, res, next)
 
     let countryName = req.params.country;
     let date = req.params.date;
+    console.log("countryName---", countryName);
     if (countryName && date) {
       const countries = await countryHelper.filterCountries(countryName, date);
 
       res.json(countries);
     } else {
-      return next(new errors.BadRequestError(err, 'Missing query parameters.'));
+      return next(new errors.BadRequestError( 'Missing query parameters.'));
     }
 
     return next();
@@ -33,3 +34,5 @@ exports.filterCountries = co.wrap(async function filterCountries(req, res, next)
     return next(new errors.InternalServerError(err, 'Server error retrieving countries.'));
   }
 });
+
+
